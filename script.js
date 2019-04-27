@@ -41,6 +41,10 @@ for (let i = 0; i < buttons.length; i++) {
 	});
 }
 
+function isOperator(btn) {
+	return btn === "+" || btn === "-" || btn === "*" || btn === "/";
+}
+
 function handleMath(btn) {
 	// if number was entered, add it to display & number var
 	if (Number(btn) == btn) {
