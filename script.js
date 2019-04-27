@@ -1,5 +1,6 @@
 // TO DO:
 // - handle user errors
+// 4 + - 9 = 4
 // - align numbers to the right on display
 // - display entire mathematical expression on screen at once? or not?
 // - eventually: handle more than two numbers?
@@ -25,76 +26,83 @@ const buttonEquals = document.getElementById("buttonEquals");
 
 // var to hold current number
 let numDisplayed = "";
-// var to hold entire sequence of buttons
+// array to hold entire sequence of buttons
 let instructions = [];
 
 // main function
 for (let i = 0; i < buttons.length; i++) {
-  buttons[i].addEventListener("click", function() {
-    let buttonClicked = event.srcElement.innerText;
-    if (buttonClicked === "C") {
-      handleClear();
-    } else {
-      handleMath(buttonClicked);
-    }
-  });
+	buttons[i].addEventListener("click", function() {
+		let buttonClicked = event.srcElement.innerText;
+		if (buttonClicked === "C") {
+			handleClear();
+		} else {
+			handleMath(buttonClicked);
+		}
+	});
 }
 
 function handleMath(btn) {
-  if (Number(btn) == btn) {
-    numDisplayed += btn;
-    console.log("numDisplayed is now: " + numDisplayed);
-    display.innerHTML = numDisplayed;
-  } else {
-    instructions.push(numDisplayed);
-    console.log("instructions is now: " + instructions);
-    display.innerHTML = numDisplayed + btn;
-    numDisplayed = "";
-    instructions.push(btn);
-    if (instructions[instructions.length-1] === "=") {
-      handleEquals(instructions);
-    }
-  }
+	// if number was entered, add it to display & number var
+	if (Number(btn) == btn) {
+		numDisplayed += btn;
+		console.log("numDisplayed is now: " + numDisplayed);
+		display.innerHTML = numDisplayed;
+	// if non-number was entered...
+	} else {
+		// save current number to array
+		instructions.push(numDisplayed);
+		console.log("instructions is now: " + instructions);
+		// add non-number to display
+		display.innerHTML = numDisplayed + btn;
+		// reset number var to empty
+		numDisplayed = "";
+		// add non-number to array
+		instructions.push(btn);
+		// if it was equals, run the equals function
+		if (instructions[instructions.length-1] === "=") {
+			handleEquals(instructions);
+		}
+	}
 }
 
 function handleClear() {
-  instructions = [];
-  numDisplayed = "";
-  display.innerHTML = 0;
+	instructions = [];
+	numDisplayed = "";
+	display.innerHTML = 0;
 }
 
 function addNums(a, b) {
-  return a + b;
+	return a + b;
 }
 
 function subtractNums(a, b) {
-  return a - b;
+	return a - b;
 }
 
 function multiplyNums(a, b) {
-  return a * b;
+	return a * b;
 }
 
 function divideNums(a, b) {
-  return a / b;
+	return a / b;
 }
 
 function handleEquals(arr) {
-  let num1 = Number(arr[0]);
-  let operation = arr[1];
-  let num2 = Number(arr[2]);
-  let result = 0;
-  if (operation === "+") {
-    result = addNums(num1, num2);
-  }
-  if (operation === "-") {
-    result = subtractNums(num1, num2);
-  }
-  if (operation === "*") {
-    result = multiplyNums(num1, num2);
-  }
-  if (operation === "/") {
-    result = divideNums(num1, num2);
-  }
-  display.innerHTML = result;
+	let num1 = Number(arr[0]);
+	let operation = arr[1];
+	let num2 = Number(arr[2]);
+	let result = 0;
+	if (operation === "+") {
+		result = addNums(num1, num2);
+	}
+	if (operation === "-") {
+		result = subtractNums(num1, num2);
+	}
+	if (operation === "*") {
+		result = multiplyNums(num1, num2);
+	}
+	if (operation === "/") {
+		result = divideNums(num1, num2);
+	}
+	display.innerHTML = result;
 }
