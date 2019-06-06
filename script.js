@@ -54,6 +54,7 @@ function handleMath(btn) {
 	// if non-number was entered...
 	} else {
 		// save current number to array
+		console.log("Saving this number to array: " + numDisplayed);
 		instructions.push(numDisplayed);
 		console.log("instructions is now: " + instructions);
 		// add non-number to display
@@ -61,7 +62,14 @@ function handleMath(btn) {
 		// reset number var to empty
 		numDisplayed = "";
 		// add non-number to array
-		instructions.push(btn);
+		console.log("Last item added to array was: " + instructions[instructions.length-1]);
+		if (isOperator(instructions[instructions.length-1])) {
+			console.log("Whoops, the previous button pressed was also an operator!");
+			instructions[instructions.length-1] = btn;
+		} else {
+			console.log("Pushing operator!");
+			instructions.push(btn);
+		}
 		// if it was equals, run the equals function
 		if (instructions[instructions.length-1] === "=") {
 			handleEquals(instructions);
@@ -109,4 +117,5 @@ function handleEquals(arr) {
 		result = divideNums(num1, num2);
 	}
 	display.innerHTML = result;
+	instructions = [];
 }
