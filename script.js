@@ -4,6 +4,7 @@
 // - align numbers to the right on display
 // - display entire mathematical expression on screen at once? or not?
 // - eventually: handle more than two numbers?
+// - eventually: convert to OOP structure
 
 const display = document.getElementById("display");
 const buttons = document.getElementsByClassName("button");
@@ -53,9 +54,11 @@ function handleMath(btn) {
 		display.innerHTML = numDisplayed;
 	// if non-number was entered...
 	} else {
-		// save current number to array
-		console.log("Saving this number to array: " + numDisplayed);
-		instructions.push(numDisplayed);
+		if (numDisplayed !== "") {
+      	  // save current number to array
+      	  console.log("Saving this number to array: " + numDisplayed);
+		  instructions.push(numDisplayed);
+    	}
 		console.log("instructions is now: " + instructions);
 		// add non-number to display
 		display.innerHTML = numDisplayed + btn;
