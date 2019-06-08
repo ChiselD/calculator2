@@ -1,6 +1,4 @@
 // TO DO:
-// - handle user errors
-// 4 + - 9 = 4
 // - align numbers to the right on display
 // - display entire mathematical expression on screen at once? or not?
 // - eventually: handle more than two numbers?
